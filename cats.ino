@@ -19,7 +19,7 @@
 
 //wine configuration
 #define WINE_PIN 3
-#define WINE_SERVING_TIME 500
+#define WINE_SERVING_TIME 15000
 
 
 int coins;
@@ -46,6 +46,7 @@ void setup() {
   
   //init Wine
   pinMode(WINE_PIN, OUTPUT);
+  digitalWrite(WINE_PIN,HIGH);
   
 }
 
@@ -140,13 +141,13 @@ void WaitForCoin(void)
 void GiveTheWine(void){
   
   //turn pump on
-  digitalWrite(WINE_PIN, HIGH);
+  digitalWrite(WINE_PIN, LOW);
   
   //wait for the glass to be full
   delay(WINE_SERVING_TIME);
   
   //turn pump off
-  digitalWrite(WINE_PIN, LOW);
+  digitalWrite(WINE_PIN, HIGH);
 }
 
 void loop() {
