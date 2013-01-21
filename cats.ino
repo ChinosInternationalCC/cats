@@ -1,3 +1,5 @@
+#include <PololuLedStrip.h>
+
 /*********************
 * connect the COIN wire to digital 2
 * set the side switches to "FAST" "NC"
@@ -10,10 +12,10 @@
 
 // attach coin wire to digital 2
 #define COIN 2
-#define SERVO_1_PIN 9
-#define SERVO_2_PIN 8
-#define SERVO_3_PIN 7
-#define SERVO_4_PIN 6
+#define SERVO_1_PIN 11
+#define SERVO_2_PIN 10
+#define SERVO_3_PIN 9
+#define SERVO_4_PIN 8
 
 
 
@@ -21,7 +23,17 @@
 #define WINE_PIN 3
 #define WINE_SERVING_TIME 15000
 
+//LED PIN
 
+#define LED_PIN 12
+PololuLedStrip<LED_PIN> ledStrip;
+
+// Create a buffer for holding 60 colors.  Takes 180 bytes.
+#define LED_COUNT 30
+rgb_color colors[LED_COUNT];
+rgb_color colorstby;
+
+#define NFLASHES 500
 int coins;
 Servo myservo1,myservo2,myservo3,myservo4;  // create servo object to control a servo 
                 // a maximum of eight servo objects can be created 
@@ -79,6 +91,18 @@ void MoveServos(void)
   delay(150);
   WriteAllServos(0);
   delay(150);
+  //lights
+    rgb_color color;
+    color.red = random(256);
+    color.green = random(256);
+    color.blue = random(256);
+    // Update the colors buffer.
+    for(byte i = 0; i < LED_COUNT; i++)
+    {
+      colors[i] = color;
+    }
+    // Write to the LED strip.
+    ledStrip.write(colors, LED_COUNT);
   #if 0
   for(pos = 90; pos < 180; pos += 1)  // goes from 0 degrees to 180 degrees 
   {                                  // in steps of 1 degree 
@@ -116,6 +140,17 @@ void MoveServos(void)
 
 void WaitForCoin(void)
 {
+  rgb_color color;
+    color.red = random(256);
+    color.green = random(256);
+    color.blue = random(256);
+    // Update the colors buffer.
+    for(byte i = 0; i < LED_COUNT; i++)
+    {
+      colors[i] = color;
+    }
+    // Write to the LED strip.
+    ledStrip.write(colors, LED_COUNT);
   // while the coin pin is low (no coin detected), do nothing
   while (! digitalRead(COIN)) {
     delay(1);
@@ -139,7 +174,18 @@ void WaitForCoin(void)
 }
 
 void GiveTheWine(void){
-  
+  rgb_color color;
+    color.red = random(256);
+    color.green = random(256);
+    color.blue = random(256);
+    // Update the colors buffer.
+    for(byte i = 0; i < LED_COUNT; i++)
+    {
+      colors[i] = color;
+    }
+    // Write to the LED strip.
+    ledStrip.write(colors, LED_COUNT);
+    
   //turn pump on
   digitalWrite(WINE_PIN, LOW);
   
