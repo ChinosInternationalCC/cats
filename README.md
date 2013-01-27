@@ -7,7 +7,7 @@ Wine serving singing cats installation
 todo
 
 ##Hardware
-![Schematic](/ChinosInternationalCC/cats/schematic/cats_bb.jpg "Schematic")
+![Schematic](https://raw.github.com/ChinosInternationalCC/cats/master/schematic/cats_bb.jpg "Schematic")
 
 Amount 	Part Type 			
 1 		Arduino Uno	
